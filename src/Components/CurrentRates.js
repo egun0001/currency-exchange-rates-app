@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table} from 'react-bootstrap';
+import {Table} from 'react-bootstrap';
 class CurrentRates extends React.Component {
     render() {
         return <div className="container">

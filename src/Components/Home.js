@@ -3,9 +3,14 @@
  */
 import React from 'react';
 import {Table} from 'react-bootstrap';
+import SelectCurrencyForm from './SelectCurrencyForm';
+
+
 class Home extends React.Component {
+
     render() {
         return <div className="container">
+            <SelectCurrencyForm />
             <span>
                 <h3>Curren Rates</h3>
             </span>
