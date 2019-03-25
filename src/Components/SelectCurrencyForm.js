@@ -4,15 +4,30 @@
 import React from 'react';
 import Select from 'react-select';
 import Button from 'react-bootstrap/Button';
+import {Table} from 'react-bootstrap';
+import * as API_CONSTANTSClass from './api/APIConstants';
 
-const colourOptions = [
-    {value: 'CAD', label: 'CAD'},
-    {value: 'USD', label: 'USD'},
-    {value: 'CHN', label: 'CHN'}
+const currencyOptions = [
+    {value: 'AUD', label: 'Australian dollar'},
+    {value: 'CAD', label: 'Canadian dollar'},
+    {value: 'CHF', label: 'Swiss frank'},
+    {value: 'CNH', label: 'Chinese Yuan'},
+    {value: 'CZK', label: 'Czech koruna'},
+    {value: 'DKK', label: 'Danish krone'},
+    {value: 'GBP', label: 'British Pound'},
+    {value: 'HKD', label: 'Hong Kong Dollar'},
+    {value: 'JPY', label: 'Japanese yen'},
+    {value: 'NOK', label: 'Norwegian Krone'},
+    {value: 'NZD', label: 'New Zealand dollar'}
 ];
 let currenciesSelected = [];
 let selectedCurrencies = [];
 let listOfCurrencies = "";
+
+// const URL = API_CONSTANTSClass.URL;
+// console.log(URL);
+// console.log(API_CONSTANTSClass.API_ACCESS_KEY);
+
 
 class SelectCurrencyForm extends React.Component {
 
@@ -20,9 +35,15 @@ class SelectCurrencyForm extends React.Component {
         super(props);
         this.state = {
             selectedOption: null,
+            // added for fetch request
+            error: null,
+            isLoaded: false,
+            rates: {},
+            date: null
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleOnClick = this.handleOnClick.bind(this);
+        this.fetchData = this.fetchData.bind(this);
     }
 
     handleChange = (selectedOption) => {
@@ -53,31 +74,101 @@ class SelectCurrencyForm extends React.Component {
             } else
                 listOfCurrencies = listOfCurrencies.concat("," + currency);
         }
-        this.getCurrenciesList();
+        console.log("String of currencies: " + listOfCurrencies);
+        this.fetchData(listOfCurrencies);
+        // this.getCurrenciesList();
         listOfCurrencies = "";
 
     };
 
-
-    getCurrenciesList() {
-        console.log("String of currencies: " + listOfCurrencies);
-        return listOfCurrencies;
+    componentDidMount() {
+        console.log(this.state.rates);
     }
 
-    render() {
+    fetchData(currencies) {
+        const GET_API =
+            API_CONSTANTSClass.URL +
+            API_CONSTANTSClass.DATE_LATEST +
+            API_CONSTANTSClass.API_ACCESS_KEY +
+            API_CONSTANTSClass.CURRENCIES_SYMBOLS +
+            currencies;
+        console.log(GET_API);
+        fetch(GET_API)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result.rates)
+                    this.setState({
+                        isLoaded: true,
+                        date: result.date,
+                        rates: result.rates
+                    });
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+    }
+
+    tableGenerator = () => {
+        let name;
+        let value;
+        for (let key in this.state.rates) {
+            name = key;
+            value = this.state.rates[key];
+            console.log(key, this.state.rates[key])
+        }
 
         return (
+
+            <Table striped bordered hover size="sm">
+                <thead>
+                <tr>
+                    <th>1 Euro</th>
+                    <th>World Currencies</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+
+                    <td>{value}</td>
+                    <td>{name}</td>
+
+                </tr>
+                </tbody>
+            </Table>
+        )
+
+    };
+
+    render() {
+        const {error, isLoaded, items} = this.state;
+        console.log(this.state.rates);
+
+        return (
+
             <div className="container">
+                {this.tableGenerator()}
+                <span>
+            </span>
                 <Select
                     onChange={this.handleChange}
                     isMulti
                     name="colors"
-                    options={colourOptions}
+                    options={currencyOptions}
                     className="basic-multi-select"
                     classNamePrefix="select"
                 />
                 <Button variant="primary" onClick={this.handleOnClick}>Submit</Button>
+
             </div>
+
         );
     }
 }

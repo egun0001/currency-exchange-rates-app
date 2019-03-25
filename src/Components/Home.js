@@ -10,25 +10,10 @@ class Home extends React.Component {
 
     render() {
         return <div className="container">
-            <SelectCurrencyForm />
             <span>
-                <h3>Curren Rates</h3>
+                <h3>Current Rates</h3>
             </span>
-            <Table striped bordered hover size="sm">
-                <thead>
-                <tr>
-                    <th>1 Euro</th>
-                    <th>World Currencies</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Euro</td>
-                    <td>CAD</td>
-
-                </tr>
-                </tbody>
-            </Table>
+            <SelectCurrencyForm />
         </div>
     }
 }
