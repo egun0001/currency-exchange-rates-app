@@ -3,7 +3,7 @@ import {Table} from 'react-bootstrap';
 class CurrentRates extends React.Component {
     render() {
         return <div className="container">
-            <Table responsive>
+            <Table striped bordered hover>
                 <thead>
                 <tr>
                     <th>Euro</th>
@@ -13,20 +13,20 @@ class CurrentRates extends React.Component {
                 </thead>
                 <tbody>
                 <tr>
-                    <td>Euro</td>
+                    <td>1 Euro</td>
                     <td>CAD</td>
-                    <td>1.43244455</td>
+                    <td>1.516801</td>
 
                 </tr>
                 <tr>
-                    <td>Euro</td>
+                    <td>1 Euro</td>
                     <td>SEK</td>
-                    <td>10.4325</td>
+                    <td>10.453699</td>
                 </tr>
                 <tr>
-                    <td>Euro</td>
+                    <td>1 Euro</td>
                     <td>CHF</td>
-                    <td>5.432455</td>
+                    <td>1.122625</td>
                 </tr>
                 </tbody>
             </Table>

@@ -2,9 +2,7 @@
  * Created by dmitry on 2019-02-26.
  */
 import React from 'react';
-import {Table} from 'react-bootstrap';
 import SelectCurrencyForm from './SelectCurrencyForm';
-
 
 class Home extends React.Component {
 

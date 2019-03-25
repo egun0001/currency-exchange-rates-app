@@ -11,14 +11,14 @@ const currencyOptions = [
     {value: 'AUD', label: 'Australian dollar'},
     {value: 'CAD', label: 'Canadian dollar'},
     {value: 'CHF', label: 'Swiss frank'},
-    {value: 'CNH', label: 'Chinese Yuan'},
     {value: 'CZK', label: 'Czech koruna'},
     {value: 'DKK', label: 'Danish krone'},
     {value: 'GBP', label: 'British Pound'},
     {value: 'HKD', label: 'Hong Kong Dollar'},
     {value: 'JPY', label: 'Japanese yen'},
     {value: 'NOK', label: 'Norwegian Krone'},
-    {value: 'NZD', label: 'New Zealand dollar'}
+    {value: 'NZD', label: 'New Zealand dollar'},
+    {value: 'SEK', label: 'Sweeden crona'}
 ];
 let currenciesSelected = [];
 let selectedCurrencies = [];
@@ -127,7 +127,7 @@ class SelectCurrencyForm extends React.Component {
 
         return (
 
-            <Table striped bordered hover size="sm">
+            <Table striped bordered hover>
                 <thead>
                 <tr>
                     <th>1 Euro</th>
@@ -148,7 +148,7 @@ class SelectCurrencyForm extends React.Component {
     };
 
     render() {
-        const {error, isLoaded, items} = this.state;
+        // const {error, isLoaded, items} = this.state;
         console.log(this.state.rates);
 
         return (
