@@ -5,6 +5,7 @@ import React from 'react';
 import Select from 'react-select';
 import Button from 'react-bootstrap/Button';
 import {Table} from 'react-bootstrap';
+// import ReactTable from "react-table";
 import * as API_CONSTANTSClass from './api/APIConstants';
 
 const currencyOptions = [
@@ -114,49 +115,40 @@ class SelectCurrencyForm extends React.Component {
                     });
                 }
             )
-    }
-
-    tableGenerator = () => {
-        let name;
-        let value;
-        for (let key in this.state.rates) {
-            name = key;
-            value = this.state.rates[key];
-            console.log(key, this.state.rates[key])
-        }
-
-        return (
-
-            <Table striped bordered hover>
-                <thead>
-                <tr>
-                    <th>1 Euro</th>
-                    <th>World Currencies</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-
-                    <td>{value}</td>
-                    <td>{name}</td>
-
-                </tr>
-                </tbody>
-            </Table>
-        )
-
     };
 
     render() {
         // const {error, isLoaded, items} = this.state;
         console.log(this.state.rates);
 
+        const data = this.state.rates;
+
+        const currenciesList = Object.entries(data).map(([item,value]) => {
+            console.log(item + " " + value);
+            return (
+                <tr>
+                    <td>{value}</td>
+                    <td>{item}</td>
+                </tr>
+            );
+        });
+
         return (
 
             <div className="container">
-                {this.tableGenerator()}
                 <span>
             </span>
+                <Table striped bordered hover>
+                    <thead>
+                    <tr>
+                        <th>1 Euro</th>
+                        <th>World Currencies</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {currenciesList}
+                    </tbody>
+                </Table>
                 <Select
                     onChange={this.handleChange}
                     isMulti
