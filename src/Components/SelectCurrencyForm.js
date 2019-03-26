@@ -5,7 +5,6 @@ import React from 'react';
 import Select from 'react-select';
 import Button from 'react-bootstrap/Button';
 import {Table} from 'react-bootstrap';
-// import ReactTable from "react-table";
 import * as API_CONSTANTSClass from './api/APIConstants';
 
 const currencyOptions = [
@@ -87,6 +86,9 @@ class SelectCurrencyForm extends React.Component {
     }
 
     fetchData(currencies) {
+        if ((!currencies || 0 === currencies.length)) {
+            return;
+        }
         const GET_API =
             API_CONSTANTSClass.URL +
             API_CONSTANTSClass.DATE_LATEST +
@@ -115,7 +117,8 @@ class SelectCurrencyForm extends React.Component {
                     });
                 }
             )
-    };
+    }
+
 
     render() {
         // const {error, isLoaded, items} = this.state;
