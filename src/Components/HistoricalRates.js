@@ -16,14 +16,27 @@ class HistoricalRates extends React.Component {
 
     onChange = date => this.setState({date});
 
+    formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    };
+
 
     render() {
-        const URL = API_CONSTANTSClass.URL;
-        console.log(URL);
-        console.log(API_CONSTANTSClass.API_ACCESS_KEY);
+
+        this.formatDate(this.state.date);
+
+        console.log("This is formatted date: " + this.formatDate(this.state.date));
 
 
-        //TODO change format for monthes
+        //TODO change format for month
         console.log(this.state.date.getFullYear() + "-" + this.state.date.getMonth() + "-" + this.state.date.getDate());
 
         return (
@@ -43,9 +56,7 @@ class HistoricalRates extends React.Component {
                     </Row>
 
                 </Container>
-                <h2>Date is: {this.state.date.getFullYear() + "-"
-                + this.state.date.getMonth()
-                + "-" + this.state.date.getDate()}
+                <h2>Date is: {this.formatDate(this.state.date)}
                 </h2>
             </div>
         );
