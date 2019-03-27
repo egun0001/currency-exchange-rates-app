@@ -126,10 +126,10 @@ class SelectCurrencyForm extends React.Component {
 
         const data = this.state.rates;
 
-        const currenciesList = Object.entries(data).map(([item,value]) => {
-            console.log(item + " " + value);
+        const currenciesList = Object.entries(data).map(([item,value,key]) => {
+            console.log(item + " " + value + key);
             return (
-                <tr>
+                <tr key={key}>
                     <td>{value}</td>
                     <td>{item}</td>
                 </tr>
