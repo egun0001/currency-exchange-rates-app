@@ -1,5 +1,10 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Calendar from 'react-calendar';
+import SelectCurrencyForm from './SelectCurrencyForm';
+
 import * as API_CONSTANTSClass from './api/APIConstants';
 
 class HistoricalRates extends React.Component {
@@ -23,11 +28,25 @@ class HistoricalRates extends React.Component {
 
         return (
             <div className="container">
-                <Calendar
-                    onChange={this.onChange}
-                    value={this.state.date}
+                <Container>
+                    <Row>
+                        <Col>
+                            <Calendar
+                                onChange={this.onChange}
+                                value={this.state.date}
 
-                />
+                            />
+                        </Col>
+                        <Col>
+                            <SelectCurrencyForm />
+                        </Col>
+                    </Row>
+
+                </Container>
+                <h2>Date is: {this.state.date.getFullYear() + "-"
+                + this.state.date.getMonth()
+                + "-" + this.state.date.getDate()}
+                </h2>
             </div>
         );
     }
