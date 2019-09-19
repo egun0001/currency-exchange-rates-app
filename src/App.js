@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {hot} from 'react-hot-loader/root';
 import {Navbar, Nav} from 'react-bootstrap';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import CurrentRates from './components/CurrentRates';
-import HistoricalRates from './components/HistoricalRates';
-import Home from './components/Home';
-import Footer from'./components/Footer';
+import CurrentRates from './Components/CurrentRates';
+import HistoricalRates from './Components/HistoricalRates';
+import Home from './Components/Home';
+import Footer from'./Components/Footer';
 import './App.css';
 
 
